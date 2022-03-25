@@ -308,8 +308,8 @@ export default function Home() {
               requests.
             </Typography>
             <Typography variant={"h6"} textAlign="center">
-              If you{`&apos`}re feeling generous, you can donate some 🪰 $FLY to
-              my wallet address.
+              If you&apos;re feeling generous, you can donate some 🪰 $FLY to my
+              wallet address.
             </Typography>
             <Typography variant={"subtitle2"} textAlign="center">
               0xD57F9b9a157B9D14feD8F21417E2dd5A49089114
