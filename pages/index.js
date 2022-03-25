@@ -34,34 +34,78 @@ export default function Home() {
 
   const [total, setTotal] = useState(0);
 
-  const { getNFTBalances: getStream, data: stream } = useNFTBalances({
+  const {
+    getNFTBalances: getStream,
+    data: stream,
+    isFetching: streamIsFetching,
+    isLoading: streamIsLoading,
+  } = useNFTBalances({
     address: CONTRACT_ADDRESSES.stream,
     chain: "avalanche",
   });
-  const { getNFTBalances: getSwamp, data: swamp } = useNFTBalances({
+  const {
+    getNFTBalances: getSwamp,
+    data: swamp,
+    isFetching: swampIsFetching,
+    isLoading: swampIsLoading,
+  } = useNFTBalances({
     address: CONTRACT_ADDRESSES.swamp,
     chain: "avalanche",
   });
-  const { getNFTBalances: getRiver, data: river } = useNFTBalances({
+  const {
+    getNFTBalances: getRiver,
+    data: river,
+    isFetching: riverIsFetching,
+    isLoading: riverIsLoading,
+  } = useNFTBalances({
     address: CONTRACT_ADDRESSES.river,
     chain: "avalanche",
   });
-  const { getNFTBalances: getForest, data: forest } = useNFTBalances({
+  const {
+    getNFTBalances: getForest,
+    data: forest,
+    isFetching: forestIsFetching,
+    isLoading: forestIsLoading,
+  } = useNFTBalances({
     address: CONTRACT_ADDRESSES.forest,
     chain: "avalanche",
   });
-  const { getNFTBalances: getLake, data: lake } = useNFTBalances({
+  const {
+    getNFTBalances: getLake,
+    data: lake,
+    isFetching: lakeIsFetching,
+    isLoading: lakeIsLoading,
+  } = useNFTBalances({
     address: CONTRACT_ADDRESSES.lake,
     chain: "avalanche",
   });
-  const { getNFTBalances: getBreeding, data: breeding } = useNFTBalances({
+  const {
+    getNFTBalances: getBreeding,
+    data: breeding,
+    isFetching: breedingIsFetching,
+    isLoading: breedingIsLoading,
+  } = useNFTBalances({
     address: CONTRACT_ADDRESSES.breeding,
     chain: "avalanche",
   });
-  const { getNFTBalances: getMarket, data: market } = useNFTBalances({
+  const {
+    getNFTBalances: getMarket,
+    data: market,
+    isFetching: marketIsFetching,
+    isLoading: marketIsLoading,
+  } = useNFTBalances({
     address: CONTRACT_ADDRESSES.market,
     chain: "avalanche",
   });
+
+  const disableButton =
+    streamIsFetching ||
+    swampIsFetching ||
+    riverIsFetching ||
+    forestIsFetching ||
+    lakeIsFetching ||
+    breedingIsFetching ||
+    marketIsFetching;
 
   const fetchAll = () => {
     console.log("fetching");
@@ -237,6 +281,7 @@ export default function Home() {
           <Grid item xs={12}>
             <Grid container justifyContent="center">
               <Button
+                disabled={disableButton}
                 startIcon={<RefreshIcon />}
                 variant="contained"
                 color="primary"
