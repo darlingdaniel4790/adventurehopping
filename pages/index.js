@@ -8,6 +8,7 @@ import Footer from "../components/Footer/Footer";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { useTheme } from "@mui/system";
 import { Twitter, YouTube } from "@mui/icons-material";
+import { logEvent } from "firebase/analytics";
 
 const CONTRACT_ADDRESSES = {
   pond: "0x85e66216fB0e80F87b54eb39a415c3bbD40E37f9",
@@ -20,19 +21,20 @@ const CONTRACT_ADDRESSES = {
   market: "0xbbF9287aFbf1CdBf9f7786E98fC6CEa73A78B6aB",
 };
 
-export default function Home() {
-  const { getNFTBalances: getPond, data: pond } = useNFTBalances({
-    address: CONTRACT_ADDRESSES.pond,
-    chain: "avalanche",
-  });
+const appVersion = 1.1;
 
+export default function Home(props) {
   const [everything, setEverything] = useState([]);
 
   const { isInitialized } = useMoralis();
 
   const [fetched, setFetched] = useState(false);
 
-  const [total, setTotal] = useState(0);
+  const { getNFTBalances: getPond, data: pond } = useNFTBalances({
+    address: CONTRACT_ADDRESSES.pond,
+    chain: "avalanche",
+    // offset: 500 * 2 - 500,
+  });
 
   const {
     getNFTBalances: getStream,
@@ -163,6 +165,9 @@ export default function Home() {
     if (isInitialized && everything.length === 0) fetchAll();
   }, [isInitialized]);
 
+  // const result = stream.result.find((a) => a.token_id === "1872");
+  // console.log(pond);
+
   if (everything.length === 8 && !fetched) {
     setFetched(true);
 
@@ -178,7 +183,6 @@ export default function Home() {
 
     let wasted = 10000 - tempTotal;
 
-    setTotal(tempTotal);
     setEverything((prev) => {
       return [...prev, { data: { total: wasted }, name: "Idle" }];
     });
@@ -247,9 +251,28 @@ export default function Home() {
                   everything
                     .sort((a, b) => b.data.total - a.data.total)
                     .map((adventure, key) => {
+                      let icon, style;
+                      switch (key) {
+                        case 0:
+                          icon = "🥇";
+                          style = "xx-large";
+                          break;
+                        case 1:
+                          icon = "🥈";
+                          style = "xx-large";
+                          break;
+                        case 2:
+                          icon = "🥉";
+                          style = "xx-large";
+                          break;
+
+                        default:
+                          icon = key + 1;
+                          break;
+                      }
                       return (
-                        <tr key={key}>
-                          <td>{key + 1}</td>
+                        <tr key={key} style={{ fontSize: style }}>
+                          <td>{icon}</td>
                           <td>{adventure.name}</td>
                           <td>{format(adventure.data.total)}</td>
                         </tr>
@@ -286,6 +309,9 @@ export default function Home() {
                 variant="contained"
                 color="primary"
                 onClick={() => {
+                  if (props.analytics != undefined) {
+                    logEvent(props.analytics, "refresh_button_clicked");
+                  }
                   setEverything([]);
                   setFetched(false);
                   fetchAll();
@@ -330,6 +356,7 @@ export default function Home() {
         </Grid>
       </div>
       <Footer>
+        <Typography variant="subtitle2">App Version: {appVersion}</Typography>
         <Typography variant="subtitle2">
           <a href="https://www.vecteezy.com/free-vector/frog-pond">
             Frog Pond Vectors by Vecteezy
