@@ -5,7 +5,7 @@ export default function Document() {
     <Html>
       <Head>
         <link
-          href="https://fonts.googleapis.com/css2?family=Sonsie+One&family=Baloo+2&family=Codystar&family=Handlee&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Sonsie+One&family=Press+Start+2P&family=Baloo+2&family=Codystar&family=Handlee&display=swap"
           rel="stylesheet"
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
