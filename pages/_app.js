@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import { MoralisProvider } from "react-moralis";
+// import { MoralisProvider } from "react-moralis";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { initializeApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
@@ -50,16 +50,18 @@ function MyApp({ Component, pageProps }) {
     },
   });
 
+  // <MoralisProvider
+  //   appId="lgr6PR27hscCvrVaLU3EWHF4PQnuDyOxmK1eednY"
+  //   serverUrl="https://yysp9eky99pr.usemoralis.com:2053/server"
+  // >
   return (
-    <MoralisProvider
-      appId="lgr6PR27hscCvrVaLU3EWHF4PQnuDyOxmK1eednY"
-      serverUrl="https://yysp9eky99pr.usemoralis.com:2053/server"
-    >
-      <ThemeProvider theme={customTheme}>
-        <Component {...pageProps} analytics={analytics} />
-      </ThemeProvider>
-    </MoralisProvider>
+    <ThemeProvider theme={customTheme}>
+      <Component {...pageProps} analytics={analytics} />
+    </ThemeProvider>
   );
+  {
+    /* </MoralisProvider> */
+  }
 }
 
 export default MyApp;
