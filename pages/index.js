@@ -179,12 +179,22 @@ export default function Home(props) {
               <td>{icon}</td>
               <td>
                 {player.address}
-                <a href={url1} target="_blank" style={{ margin: "5px" }}>
+                <a
+                  href={url1}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ margin: "5px" }}
+                >
                   <Tooltip title="View on Snowtrace">
                     <AcUnit fontSize="5px" />
                   </Tooltip>
                 </a>
-                <a href={url2} target="_blank" style={{ margin: "5px" }}>
+                <a
+                  href={url2}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ margin: "5px" }}
+                >
                   <Tooltip title="View on Hopper Shopper">
                     <Visibility fontSize="5px" />
                   </Tooltip>
@@ -232,12 +242,22 @@ export default function Home(props) {
               <td>{icon}</td>
               <td>
                 {player.address}
-                <a href={url1} target="_blank" style={{ margin: "5px" }}>
+                <a
+                  href={url1}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ margin: "5px" }}
+                >
                   <Tooltip title="View on Snowtrace">
                     <AcUnit fontSize="5px" />
                   </Tooltip>
                 </a>
-                <a href={url2} target="_blank" style={{ margin: "5px" }}>
+                <a
+                  href={url2}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ margin: "5px" }}
+                >
                   <Tooltip title="View on Hopper Shopper">
                     <Visibility fontSize="5px" />
                   </Tooltip>
